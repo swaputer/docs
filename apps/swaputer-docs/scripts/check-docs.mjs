@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,6 +12,19 @@ async function text(path) {
 
 async function json(path) {
   return JSON.parse(await text(path));
+}
+
+async function markdownDocuments(directory) {
+  const documents = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) {
+      documents.push(...await markdownDocuments(path));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      documents.push([path, await readFile(path, "utf8")]);
+    }
+  }
+  return documents;
 }
 
 function includes(source, expected, label) {
@@ -35,6 +48,7 @@ const [
   receiptConstants,
   tinySolPackage,
   receiptPackage,
+  docsPackage,
   quickstartPage,
   actionsPage,
   eventsPage
@@ -46,6 +60,7 @@ const [
   text("tooling/receipt-codec/src/constants.ts"),
   json("tooling/tinysol/package.json"),
   json("tooling/receipt-codec/package.json"),
+  json("apps/swaputer-docs/package.json"),
   text("apps/swaputer-docs/docs/developers/quickstart.md"),
   text("apps/swaputer-docs/docs/developers/actions.md"),
   text("apps/swaputer-docs/docs/developers/events-indexing.md")
@@ -89,11 +104,27 @@ for (const [constant, label] of receiptLimits) {
 
 assert.equal(tinySolPackage.private, true);
 assert.equal(receiptPackage.private, true);
+assert.equal(docsPackage.name, "@swaputer/docs");
+assert.equal(docsPackage.private, true);
 includes(quickstartPage, "withdrawn on September 6, 2026", "withdrawn npm toolchain notice");
 includes(quickstartPage, "npm run build --prefix tooling/tinysol", "local TinySol build");
 includes(eventsPage, "npm run build --prefix tooling/receipt-codec", "local receipt codec build");
-assert.ok(!quickstartPage.includes("npm install --global @swaputer/"), "withdrawn public CLI install is still documented");
-assert.ok(!eventsPage.includes("npm install @swaputer/receipt-codec@"), "withdrawn public codec install is still documented");
+includes(eventsPage, 'from "@swaputer-labs/receipt-codec";', "future receipt codec package scope");
+assert.ok(!eventsPage.includes('from "@swaputer/receipt-codec";'), "withdrawn codec scope is still imported");
+
+const documentationPages = await markdownDocuments(resolve(docsRoot, "docs"));
+for (const [path, source] of documentationPages) {
+  assert.doesNotMatch(
+    source,
+    /\bnpm\s+(?:install|i)\b[^\r\n]*@swaputer\//u,
+    `withdrawn public package install is still documented in ${path}`
+  );
+  assert.doesNotMatch(
+    source,
+    /\bnpm\s+(?:install|i)\b[^\r\n]*@swaputer-labs\//u,
+    `unpublished @swaputer-labs package install is documented in ${path}`
+  );
+}
 
 const requiredCompileFlags = [
   "--input", "--output", "--abi", "--events", "--storage-layout", "--manifest", "--assembly", "--source-map"

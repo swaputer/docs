@@ -66,7 +66,7 @@ npm install /absolute/path/to/Swaputer/tooling/receipt-codec
 ```
 
 ```ts
-import { decodeVMReceipt } from "@swaputer/receipt-codec";
+import { decodeVMReceipt } from "@swaputer-labs/receipt-codec";
 
 const receipt = decodeVMReceipt(payload);
 
