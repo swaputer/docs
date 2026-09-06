@@ -1,0 +1,3 @@
+[submodule ".deps/protocol"]
+	path = .deps/protocol
+	url = https://github.com/swaputer/protocol.git

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880" role="img" aria-labelledby="title desc">
+  <title id="title">Swaputer execution and atomic settlement</title>
+  <desc id="desc">ETH and a signed Action enter an executable buy. The Hook, Kernel, and SVM process it. Net tokens, state, fee burn, and Events settle together, while a failure at any stage reverts everything.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#19191c"/>
+      <stop offset="1" stop-color="#121214"/>
+    </linearGradient>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#66666e"/>
+    </marker>
+    <marker id="arrowPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#ff37c7"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="880" fill="#0d0d0f"/>
+  <text x="80" y="88" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="650">One transaction. One settlement boundary.</text>
+  <text x="80" y="128" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="18">The program result is never separated from the swap that opened execution.</text>
+
+  <rect x="80" y="218" width="250" height="178" rx="18" fill="url(#panel)" stroke="#34343a"/>
+  <text x="110" y="260" fill="#ff70d7" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="650" letter-spacing="1.4">INPUT</text>
+  <text x="110" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="620">ETH + Action</text>
+  <text x="110" y="350" fill="#9b9ba2" font-family="Inter, Arial, sans-serif" font-size="17">Signed intent and budget</text>
+
+  <rect x="405" y="218" width="250" height="178" rx="18" fill="url(#panel)" stroke="#ff37c7" stroke-opacity=".5"/>
+  <text x="435" y="260" fill="#ff70d7" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="650" letter-spacing="1.4">01 · ENTER</text>
+  <text x="435" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="620">Pool + Hook</text>
+  <text x="435" y="350" fill="#9b9ba2" font-family="Inter, Arial, sans-serif" font-size="17">Execute the buy</text>
+
+  <rect x="730" y="218" width="250" height="178" rx="18" fill="url(#panel)" stroke="#34343a"/>
+  <text x="760" y="260" fill="#ff70d7" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="650" letter-spacing="1.4">02 · VERIFY</text>
+  <text x="760" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="620">Kernel</text>
+  <text x="760" y="350" fill="#9b9ba2" font-family="Inter, Arial, sans-serif" font-size="17">Bind intent and limits</text>
+
+  <rect x="1055" y="218" width="250" height="178" rx="18" fill="url(#panel)" stroke="#34343a"/>
+  <text x="1085" y="260" fill="#ff70d7" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="650" letter-spacing="1.4">03 · EXECUTE</text>
+  <text x="1085" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="620">SVM</text>
+  <text x="1085" y="350" fill="#9b9ba2" font-family="Inter, Arial, sans-serif" font-size="17">Run root and nested calls</text>
+
+  <rect x="1380" y="218" width="140" height="178" rx="18" fill="#1b151a" stroke="#ff37c7" stroke-opacity=".6"/>
+  <text x="1410" y="260" fill="#ff70d7" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="650" letter-spacing="1.4">04</text>
+  <text x="1410" y="310" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="620">Settle</text>
+  <text x="1410" y="350" fill="#9b9ba2" font-family="Inter, Arial, sans-serif" font-size="17">Atomically</text>
+
+  <path d="M330 307H405" stroke="#ff37c7" stroke-width="4" marker-end="url(#arrowPink)"/>
+  <path d="M655 307H730" stroke="#66666e" stroke-width="3" marker-end="url(#arrowGray)"/>
+  <path d="M980 307H1055" stroke="#66666e" stroke-width="3" marker-end="url(#arrowGray)"/>
+  <path d="M1305 307H1380" stroke="#ff37c7" stroke-width="4" marker-end="url(#arrowPink)"/>
+
+  <path d="M1450 396V486H230" fill="none" stroke="#4a4a50" stroke-width="2"/>
+  <path d="M230 486V544M530 486V544M790 486V544M1050 486V544M1360 486V544" stroke="#4a4a50" stroke-width="2"/>
+  <rect x="80" y="544" width="300" height="112" rx="15" fill="#151518" stroke="#34343a"/>
+  <text x="110" y="590" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="610">Net World tokens</text>
+  <text x="110" y="625" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="16">Delivered to recipient</text>
+
+  <rect x="420" y="544" width="220" height="112" rx="15" fill="#151518" stroke="#34343a"/>
+  <text x="450" y="590" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="610">State</text>
+  <text x="450" y="625" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="16">Committed</text>
+
+  <rect x="680" y="544" width="220" height="112" rx="15" fill="#151518" stroke="#34343a"/>
+  <text x="710" y="590" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="610">Fee burn</text>
+  <text x="710" y="625" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="16">Executed bytes only</text>
+
+  <rect x="940" y="544" width="220" height="112" rx="15" fill="#151518" stroke="#34343a"/>
+  <text x="970" y="590" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="610">Events</text>
+  <text x="970" y="625" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="16">Ordered receipt</text>
+
+  <rect x="1200" y="544" width="320" height="112" rx="15" fill="#151518" stroke="#34343a"/>
+  <text x="1230" y="590" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="610">Nonce + execution height</text>
+  <text x="1230" y="625" fill="#929299" font-family="Inter, Arial, sans-serif" font-size="16">Advanced together</text>
+
+  <rect x="80" y="724" width="1440" height="82" rx="16" fill="#171315" stroke="#4c273f"/>
+  <text x="110" y="775" fill="#ff8bdd" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="610">Failure at any stage</text>
+  <text x="342" y="775" fill="#b7b7bd" font-family="Inter, Arial, sans-serif" font-size="19">→ the host-chain transaction reverts; no partial state, fee burn, nonce, token delivery, or Events remain.</text>
+</svg>
