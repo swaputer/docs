@@ -167,14 +167,40 @@ const tx = await swaputerRouter.buyVMExactInput(
   envelope,
   { value: exactEthAmountIn }
 );
-const receipt = await tx.wait();
+const requiredConfirmations = releaseManifest.indexer.confirmations;
+if (!Number.isSafeInteger(requiredConfirmations) || requiredConfirmations < 12) {
+  throw new Error("Invalid release confirmation policy");
+}
+
+const receipt = await tx.wait(requiredConfirmations);
+if (!receipt || receipt.status !== 1 || !signer.provider) {
+  throw new Error("Deployment was not confirmed successfully");
+}
+
+const [canonicalReceipt, canonicalTransaction, canonicalBlock] = await Promise.all([
+  signer.provider.getTransactionReceipt(receipt.hash),
+  signer.provider.getTransaction(receipt.hash),
+  signer.provider.getBlock(receipt.blockNumber)
+]);
+if (!canonicalReceipt
+  || canonicalReceipt.blockHash !== receipt.blockHash
+  || canonicalTransaction?.blockHash !== receipt.blockHash
+  || canonicalBlock?.hash !== receipt.blockHash) {
+  throw new Error("Deployment receipt is no longer canonical");
+}
 ```
 
 `msg.value` must equal the signed `exactEthAmountIn`, and the Swaputer Router's price-limit argument must equal the signed value. This example intentionally uses the executor-bound Swaputer Router path. Studio and Minter may instead use the direct Universal Router binding described in [Actions & Signatures](/developers/actions#routing-modes).
 
 ## 8. Verify the deployment
 
-After confirmation, do not rely on a success toast alone:
+Do not treat submission or a one-block receipt as final. The bundled Base
+Sepolia release requires 12 confirmations; applications should read that value
+from the authenticated release manifest, then re-read the transaction, receipt,
+and containing block by height as shown above. If any result is missing or
+contradictory, preserve the transaction hash for reconciliation and do not
+blindly retry. After canonical confirmation, do not rely on a success toast
+alone:
 
 ```ts
 const deployedHash = await kernel.programCodeHash(worldId, programId);

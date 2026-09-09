@@ -31,6 +31,13 @@ A single address cannot tell a client whether:
 
 Frontend configuration, Studio, indexers, and deployment scripts should derive their values from the same release object instead of maintaining independent sets of constants.
 
+Transaction success follows the same rule. Wait for the manifest's confirmation
+count, then re-read the receipt and transaction by hash and the containing block
+by height. Their transaction hash, block hash, block number, and transaction
+index must agree before an application presents the write as confirmed. A
+missing or contradictory result is unresolved, not failed: retain the submitted
+hash and prevent a blind retry until it has been reconciled.
+
 ## Verification sequence
 
 ### 1. Network
