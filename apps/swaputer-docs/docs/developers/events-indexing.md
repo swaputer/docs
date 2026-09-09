@@ -140,7 +140,7 @@ An indexer outage affects query availability, not onchain SVM state. Before a va
 
 ## Reference indexer
 
-The repository's Go service at `services/svm-indexer` provides:
+Swaputer Explorer runs and maintains the Go indexer that provides:
 
 - strict outer Events and receipt validation;
 - configurable Kernel and start block;

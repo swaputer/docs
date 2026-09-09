@@ -4,11 +4,11 @@ Swaputer publishes three focused packages under the `@swaputer-labs` scope.
 They are public, MIT-licensed, and do not include a wallet or a Base Mainnet
 release configuration.
 
-| Package | Current release | Purpose |
-| --- | --- | --- |
-| [`@swaputer-labs/tinysol`](https://www.npmjs.com/package/@swaputer-labs/tinysol/v/0.3.2) | `0.3.2` | TinySol compiler, assembler, simulator, fee estimator, and offline CLI |
-| [`@swaputer-labs/receipt-codec`](https://www.npmjs.com/package/@swaputer-labs/receipt-codec/v/0.1.2) | `0.1.2` | Strict, dependency-free `VMReceiptV1` encoder and decoder |
-| [`@swaputer-labs/cli`](https://www.npmjs.com/package/@swaputer-labs/cli/v/0.1.2) | `0.1.2` | Read-only Node.js CLI for verifying Swaputer transactions and receipt payloads |
+| Package | Current release | Runtime and module boundary | Purpose |
+| --- | --- | --- | --- |
+| [`@swaputer-labs/tinysol`](https://www.npmjs.com/package/@swaputer-labs/tinysol/v/0.3.2) | `0.3.2` | Node.js `>=22`; ESM-only API and `tinysol` CLI | TinySol compiler, assembler, simulator, fee estimator, and offline CLI |
+| [`@swaputer-labs/receipt-codec`](https://www.npmjs.com/package/@swaputer-labs/receipt-codec/v/0.1.2) | `0.1.2` | Node.js `>=20`; ESM-only API | Strict, dependency-free `VMReceiptV1` encoder and decoder |
+| [`@swaputer-labs/cli`](https://www.npmjs.com/package/@swaputer-labs/cli/v/0.1.2) | `0.1.2` | Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export | Read-only verifier for Swaputer transactions and receipt payloads |
 
 ## Install the libraries
 

@@ -55,7 +55,8 @@ const [
   quickstartPage,
   actionsPage,
   eventsPage,
-  toolingPackagesPage
+  toolingPackagesPage,
+  firstProgramPage
 ] = await Promise.all([
   json("deployments/active/base-sepolia.json"),
   json("deployments/base-sepolia/swaputer-events-latest.json"),
@@ -71,7 +72,8 @@ const [
   text("apps/swaputer-docs/docs/developers/quickstart.md"),
   text("apps/swaputer-docs/docs/developers/actions.md"),
   text("apps/swaputer-docs/docs/developers/events-indexing.md"),
-  text("apps/swaputer-docs/docs/developers/tooling-packages.md")
+  text("apps/swaputer-docs/docs/developers/tooling-packages.md"),
+  text("apps/swaputer-docs/docs/developers/first-program.md")
 ]);
 
 assert.equal(activeRelease.schemaVersion, "swaputer-active-release/1");
@@ -127,6 +129,10 @@ assert.ok(!eventsPage.includes('from "@swaputer/receipt-codec";'), "withdrawn co
 includes(toolingPackagesPage, "is a Node.js command-line package", "CLI runtime boundary");
 includes(toolingPackagesPage, "legacy `swaputer --version` output displays `0.1.1`", "CLI display-version notice");
 assert.ok(!toolingPackagesPage.includes("@swaputer-labs/cli/browser"), "unpublished CLI browser subpath is documented");
+includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and `tinysol` CLI", "TinySol runtime and module boundary");
+includes(toolingPackagesPage, "Node.js `>=20`; ESM-only API", "receipt codec runtime and module boundary");
+includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export", "CLI runtime and module boundary");
+includes(firstProgramPage, "npm install ethers@6.17.0", "first-program ethers dependency");
 
 for (const entry of npmRelease.packages) {
   const sourcePackage = [tinySolPackage, receiptPackage, cliPackage].find((candidate) => candidate.name === entry.name);
@@ -162,7 +168,8 @@ for (const flag of requiredCompileFlags) {
 
 assert.ok(!eventsPage.includes("@swaputer/indexer"), "legacy TypeScript indexer package is still documented");
 assert.ok(!eventsPage.includes("SQLite"), "legacy SQLite storage is still documented");
-includes(eventsPage, "services/svm-indexer", "Go indexer path");
+includes(eventsPage, "Swaputer Explorer runs and maintains the Go indexer", "Explorer indexer ownership");
+assert.ok(!eventsPage.includes("The repository's Go service"), "ambiguous indexer repository ownership is still documented");
 includes(eventsPage, "PostgreSQL", "Go indexer storage");
 
 process.stdout.write("Swaputer documentation drift check passed.\n");

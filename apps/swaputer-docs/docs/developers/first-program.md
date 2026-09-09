@@ -2,6 +2,12 @@
 
 This guide uses a Counter to connect the complete path: compile TinySol, encode constructor arguments, derive a Program ID, sign an Action, deploy onchain, call the program, and read its state. Examples use ethers v6. Always source live network parameters from a verified release manifest.
 
+The TypeScript examples use the ESM build of an exact ethers release:
+
+```sh
+npm install ethers@6.17.0
+```
+
 ## 1. Write Counter
 
 Create `Counter.tiny.sol`:
