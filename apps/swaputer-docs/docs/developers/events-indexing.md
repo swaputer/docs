@@ -57,12 +57,10 @@ The final record must be the only `WorldExecution` record. It includes the actor
 
 ## Decode a receipt
 
-The repository's strict codec validates the complete payload before returning immutable records. It never returns a partial result after a decoding failure.
+The public strict codec validates the complete payload before returning immutable records. It never returns a partial result after a decoding failure.
 
 ```sh
-npm ci --prefix tooling/receipt-codec
-npm run build --prefix tooling/receipt-codec
-npm install /absolute/path/to/Swaputer/tooling/receipt-codec
+npm install @swaputer-labs/receipt-codec@0.1.2
 ```
 
 ```ts
@@ -75,7 +73,18 @@ console.log(receipt.worldExecution.executedBytes);
 console.log(receipt.worldExecution.tokenBurned);
 ```
 
-The first public codec version was withdrawn on September 6, 2026. Until a new package release is announced, integrations should install the built local workspace as shown above and pin the exact reviewed source commit.
+Pin the exact package version in production integrations. When starting from an
+Ethereum transaction hash instead of an extracted receipt payload, use the
+read-only verifier:
+
+```sh
+npx @swaputer-labs/cli@0.1.2 inspect 0xTRANSACTION_HASH \
+  --network base-sepolia \
+  --rpc-env BASE_SEPOLIA_RPC_URL
+```
+
+The RPC URL is read from the explicitly named environment variable and is never
+accepted as a command-line argument or included in verifier output.
 
 Unknown application records are preserved with their raw emitter, topics, and data. A client should not drop or rewrite records simply because an ABI is not yet available.
 

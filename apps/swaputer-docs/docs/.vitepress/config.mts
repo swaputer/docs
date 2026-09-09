@@ -41,6 +41,7 @@ export default defineConfig({
         text: "Developers",
         items: [
           { text: "Quickstart", link: "/developers/quickstart" },
+          { text: "npm Tooling Packages", link: "/developers/tooling-packages" },
           { text: "Build Your First Program", link: "/developers/first-program" },
           { text: "TinySol", link: "/developers/tinysol" },
           { text: "Actions & Signatures", link: "/developers/actions" },

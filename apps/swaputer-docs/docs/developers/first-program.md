@@ -30,7 +30,7 @@ contract Counter {
 Follow the [Developer Quickstart](/developers/quickstart) to produce all seven compiler artifacts, then record the package hash:
 
 ```sh
-node tooling/tinysol/dist/src/cli.js hash \
+npx tinysol hash \
   --input build/counter/Counter.svm
 ```
 
