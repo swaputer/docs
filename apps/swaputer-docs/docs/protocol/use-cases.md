@@ -14,7 +14,7 @@ The real World token and program-defined assets remain separate. The World token
 
 Programs can hold assets in escrow, express offers, and settle trades against explicit authorization. A market may use a narrowly bound EVM contract where host-chain custody is required, while the corresponding program maintains SVM-side balances and settlement state.
 
-This model supports fixed-price listings, bids, bilateral swaps, auctions, and application-specific exchanges. The important property is not the interface shown by a marketplace. It is that custody, authorization, program state, and Events are checked against known identities and committed atomically.
+This model supports fixed-price listings, bilateral swaps, and application-specific exchanges. The important property is not the interface shown by a marketplace. It is that custody, authorization, program state, and Events are checked against known identities and committed atomically.
 
 ## Backed representations
 
@@ -43,7 +43,6 @@ The bridge, SRC20 minter, market, and Studio are useful because they exercise di
 | SRC20 | Program-defined assets, balances, minting policy, and transfers |
 | Market | Escrow, authorization, cross-layer binding, and atomic settlement |
 | sETH bridge | Backing invariants and a narrowly bound EVM custody component |
-| Auction | Stateful bidding, deadlines, settlement, and refund paths |
 | Studio | Reproducible compilation, constructor encoding, deployment, and calls |
 
 Developers can begin with [Build Your First Program](/developers/first-program). Readers evaluating the boundary should continue to [Security & Trust Model](/protocol/security).

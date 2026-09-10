@@ -32,7 +32,7 @@ A program's identity is established by its deployment package, code hash, and AB
 
 ## Applications are programs
 
-Applications inherit the World boundary but define their own rules. SRC20, the sETH bridge, markets, and auctions are examples built with programs and narrowly bound EVM components; they are not privileged cases embedded in the Kernel. Studio is a developer interface to this same runtime, not a separate execution environment.
+Applications inherit the World boundary but define their own rules. SRC20, the sETH bridge, and markets are examples built with programs and narrowly bound EVM components; they are not privileged cases embedded in the Kernel. Studio is a developer interface to this same runtime, not a separate execution environment.
 
 See [What Can Be Built](/protocol/use-cases) for the application design space.
 

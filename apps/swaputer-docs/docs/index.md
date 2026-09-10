@@ -61,7 +61,7 @@ The complete vocabulary is defined in [Concepts & Terminology](/protocol/glossar
 
 ## What can be built
 
-Swaputer is an execution protocol rather than a single application. SRC20 assets, atomic markets, collateral-backed representations such as sETH, auctions, games, and coordination systems can all be implemented as programs inside a World.
+Swaputer is an execution protocol rather than a single application. SRC20 assets, atomic markets, collateral-backed representations such as sETH, games, and coordination systems can all be implemented as programs inside a World.
 
 These applications share the protocol's execution and settlement guarantees, but their business rules remain in immutable program code. See [What Can Be Built](/protocol/use-cases) for the application design space and the guarantees each category can inherit.
 
