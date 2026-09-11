@@ -1,4 +1,4 @@
-# Deploy, Call, and Constructor Arguments
+# Deploy, Call, and Read Programs
 
 Deploying an SVM program does not upload loose bytecode. It registers a verifiable `ProgramPackage`, runs its constructor, and derives a deterministic Program ID.
 
@@ -14,11 +14,11 @@ A deployment tool should validate all of the following:
 - runtime entry point;
 - target World and byte limit.
 
-The network, World, Kernel, and selected Router must come from the same release manifest. Never assemble a deployment request from addresses or code hashes taken from different releases. See [Actions & Signatures](/developers/actions#routing-modes) before choosing the direct Universal Router path or an executor-bound Swaputer Router path.
+The network, World, Kernel, and selected Router must come from the same release manifest. Never assemble a deployment request from addresses or code hashes taken from different releases. A state change enters through a verified execution Router; a read-only query calls `Kernel.staticCall` directly. See [Actions & Signatures](/developers/actions#routing-modes) before selecting the direct-client or EVM-application route.
 
 ## Encode constructor arguments
 
-Studio and SDKs should collect constructor arguments in ABI declaration order. The constructor payload is part of the DEPLOY Action and is committed by the signed `payloadHash`.
+Deployment clients and SDKs should collect constructor arguments in ABI declaration order. The constructor payload is part of the DEPLOY Action and is committed by the signed `payloadHash`.
 
 The canonical DEPLOY payload is:
 

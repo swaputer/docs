@@ -27,7 +27,21 @@ The relayer submitting a transaction, its recipient, and its authorized executor
 
 See [Actions & Signatures](/developers/actions) for the complete typed data schema, domain, and retry rules.
 
-Direct DEPLOY and CALL actions from Studio, Minter, or another compatible client can bind the official Uniswap Universal Router and carry the signed envelope in the v4 swap's `hookData`. Application flows that require a specific EVM executor, including markets and sETH, bind the Swaputer Router and that application executor instead.
+## How an application reaches the SVM
+
+Every state-changing DEPLOY or CALL must enter through the World's exact-input ETH → World-token buy. The Hook opens SVM execution after the swap and the Kernel commits the result. Users cannot call the Kernel directly to change SVM state.
+
+This requirement does not mean a user must always call the Swaputer Router directly. There are three entry modes:
+
+| Operation | Call path | Action binding |
+| --- | --- | --- |
+| Direct state change | User → verified router → PoolManager → Hook → Kernel | Bind the actual router; `authorizedExecutor` may be zero |
+| EVM application flow | User → application contract → Swaputer Router → PoolManager → Hook → Kernel | Bind the Swaputer Router and require the application contract as `authorizedExecutor` |
+| Read-only query | User, frontend, or contract → `Kernel.staticCall` | No signed Action, swap, executor binding, or World-token burn |
+
+A direct client can use the verified Uniswap Universal Router and place the signed envelope in the v4 swap's `hookData`. A contract-mediated application uses the second pattern when it must coordinate EVM custody or application state with the SVM transition.
+
+Both state-changing paths reach the same Hook, Kernel, and SVM. They differ only in who submits the swap and whether the user's signature requires a particular EVM application executor.
 
 ## Execution metering
 

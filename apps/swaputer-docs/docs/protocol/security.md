@@ -29,7 +29,7 @@ The real World token is an ERC-20 held and traded through a Uniswap v4 pool. Ass
 - SVM programs cannot modify the real World token's ERC-20 transfer rules.
 - World token → ETH sells do not execute SVM programs.
 - Programs cannot install a sell tax, pause switch, or blacklist on the real World token.
-- Applications such as the bridge and market can move assets only within their explicit bindings and authorization scope.
+- Executor-bound applications can move assets only within their explicit bindings and authorization scope.
 
 Sells remain subject to pool liquidity, price impact, slippage, MEV, and host-network conditions. Bypassing the SVM is not a guarantee of liquidity or execution price.
 

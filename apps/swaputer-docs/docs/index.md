@@ -61,7 +61,7 @@ The complete vocabulary is defined in [Concepts & Terminology](/protocol/glossar
 
 ## What can be built
 
-Swaputer is an execution protocol rather than a single application. SRC20 assets, atomic markets, collateral-backed representations such as sETH, games, and coordination systems can all be implemented as programs inside a World.
+Swaputer is an execution protocol rather than a single application. SRC20 assets, atomic exchanges, games, and coordination systems can all be implemented as programs inside a World.
 
 These applications share the protocol's execution and settlement guarantees, but their business rules remain in immutable program code. See [What Can Be Built](/protocol/use-cases) for the application design space and the guarantees each category can inherit.
 
@@ -70,13 +70,14 @@ These applications share the protocol's execution and settlement guarantees, but
 - Only exact-input ETH → World token buys can trigger stateful execution.
 - Selling the real World token does not enter the SVM. Programs cannot block exits or add a sell tax.
 - Program state is isolated by `worldId`. A reverted root execution commits no state, nonce, fee burn, or Events.
-- SRC20, the sETH bridge, and the market are applications built on the protocol—not special cases embedded in the Kernel.
+- SRC20 and future applications are built on the protocol—not special cases embedded in the Kernel.
 - A World's execution identity is determined by onchain components, fixed parameters, and code hashes—not by a name shown in a frontend.
 
 ## Where to go next
 
 To understand the protocol and its design:
 
+- [Architecture in 5 Minutes](/architecture): the complete system on one page
 - [Core Model](/protocol/overview): Worlds, assets, and application boundaries
 - [Execution & Settlement](/protocol/execution): Actions, swaps, metering, and atomicity
 - [Security & Trust Model](/protocol/security): immutable boundaries, authorization, and residual risk
@@ -85,4 +86,12 @@ To start building:
 
 - [Developer Quickstart](/developers/quickstart): install, compile, and verify the toolchain
 - [Build Your First Program](/developers/first-program): go from TinySol source to deployment, calls, and reads
+- [Build a Swaputer Client](/developers/frontend-integration): quote, simulate, sign, submit, and reconcile transactions
+- [SVM Context Reference](/developers/svm-context): understand callers, actors, executors, buy context, and metering
 - [Actions & Signatures](/developers/actions): construct a valid onchain execution intent
+- [Integrate EVM and SVM](/developers/evm-svm-integration): coordinate an EVM application contract with an SVM transition
+
+To study complete application patterns:
+
+- [Build an ETH-Backed SRC20](/patterns/eth-backed-src20): deposits, minting, burning, redemption, and backing invariants
+- [Build an Atomic ETH/SRC20 Market](/patterns/atomic-market): EVM ETH custody, SVM token escrow, and atomic settlement

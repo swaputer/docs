@@ -24,46 +24,49 @@ export default defineConfig({
         text: "Start Here",
         items: [
           { text: "What is Swaputer?", link: "/" },
-          { text: "What Can Be Built", link: "/protocol/use-cases" }
+          { text: "Architecture in 5 Minutes", link: "/architecture" },
+          { text: "Developer Quickstart", link: "/developers/quickstart" },
+          { text: "Build Your First Program", link: "/developers/first-program" }
         ]
       },
       {
-        text: "Protocol",
+        text: "Core Concepts",
         items: [
           { text: "Core Model", link: "/protocol/overview" },
           { text: "Execution & Settlement", link: "/protocol/execution" },
           { text: "SVM Programs", link: "/protocol/programs" },
           { text: "Security & Trust Model", link: "/protocol/security" },
-          { text: "Concepts & Terminology", link: "/protocol/glossary" }
+          { text: "What Can Be Built", link: "/protocol/use-cases" }
         ]
       },
       {
-        text: "Developers",
+        text: "Developer Guides",
         items: [
-          { text: "Quickstart", link: "/developers/quickstart" },
-          { text: "npm Tooling Packages", link: "/developers/tooling-packages" },
-          { text: "Build Your First Program", link: "/developers/first-program" },
-          { text: "TinySol", link: "/developers/tinysol" },
-          { text: "Actions & Signatures", link: "/developers/actions" },
-          { text: "Deploy & Call", link: "/developers/deploy-and-call" },
+          { text: "Deploy, Call & Read", link: "/developers/deploy-and-call" },
+          { text: "Build a Client", link: "/developers/frontend-integration" },
+          { text: "Integrate EVM and SVM", link: "/developers/evm-svm-integration" },
           { text: "Events & Indexing", link: "/developers/events-indexing" },
           { text: "Verify a Deployment", link: "/developers/deployments" }
         ]
       },
+      {
+        text: "Application Patterns",
+        items: [
+          { text: "ETH-Backed SRC20", link: "/patterns/eth-backed-src20" },
+          { text: "Atomic ETH/SRC20 Market", link: "/patterns/atomic-market" }
+        ]
+      },
+      {
+        text: "Reference",
+        items: [
+          { text: "TinySol Language", link: "/developers/tinysol" },
+          { text: "SVM Context", link: "/developers/svm-context" },
+          { text: "Actions & Signatures", link: "/developers/actions" },
+          { text: "npm Tooling Packages", link: "/developers/tooling-packages" },
+          { text: "Concepts & Terminology", link: "/protocol/glossary" }
+        ]
+      },
     ],
-    search: {
-      provider: "local",
-      options: {
-        translations: {
-          button: { buttonText: "Search docs", buttonAriaLabel: "Search docs" },
-          modal: {
-            noResultsText: "No results found",
-            resetButtonTitle: "Clear search",
-            footer: { selectText: "Select", navigateText: "Navigate", closeText: "Close" }
-          }
-        }
-      }
-    },
     outline: { level: [2, 3], label: "On this page" },
     docFooter: { prev: "Previous page", next: "Next page" },
     lastUpdated: { text: "Last updated" },

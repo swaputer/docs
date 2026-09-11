@@ -147,7 +147,7 @@ Swaputer Explorer runs and maintains the Go indexer that provides:
 - PostgreSQL raw history and derived views;
 - reorg rollback, idempotent rescans, and orphan retention;
 - code-hash-bound `verified` and `declared-unverified` decoding;
-- cursor-paginated transaction, contract, account, SRC20, and market queries;
+- cursor-paginated transaction, contract, account, and SRC20 queries;
 - WebSocket-first ingestion with HTTP reconciliation and RPC failover.
 
 It is the reference implementation of the protocol data model, not part of onchain consensus.

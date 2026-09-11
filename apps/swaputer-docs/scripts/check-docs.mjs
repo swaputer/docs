@@ -56,7 +56,11 @@ const [
   actionsPage,
   eventsPage,
   toolingPackagesPage,
-  firstProgramPage
+  firstProgramPage,
+  evmSvmGuidePage,
+  svmContextPage,
+  ethBackedSrc20Page,
+  atomicMarketPage
 ] = await Promise.all([
   json("deployments/active/base-sepolia.json"),
   json("deployments/base-sepolia/swaputer-events-latest.json"),
@@ -73,7 +77,11 @@ const [
   text("apps/swaputer-docs/docs/developers/actions.md"),
   text("apps/swaputer-docs/docs/developers/events-indexing.md"),
   text("apps/swaputer-docs/docs/developers/tooling-packages.md"),
-  text("apps/swaputer-docs/docs/developers/first-program.md")
+  text("apps/swaputer-docs/docs/developers/first-program.md"),
+  text("apps/swaputer-docs/docs/developers/evm-svm-integration.md"),
+  text("apps/swaputer-docs/docs/developers/svm-context.md"),
+  text("apps/swaputer-docs/docs/patterns/eth-backed-src20.md"),
+  text("apps/swaputer-docs/docs/patterns/atomic-market.md")
 ]);
 
 assert.equal(activeRelease.schemaVersion, "swaputer-active-release/1");
@@ -133,6 +141,39 @@ includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and `tinysol` CLI", 
 includes(toolingPackagesPage, "Node.js `>=20`; ESM-only API", "receipt codec runtime and module boundary");
 includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export", "CLI runtime and module boundary");
 includes(firstProgramPage, "npm install ethers@6.17.0", "first-program ethers dependency");
+includes(evmSvmGuidePage, "The application and program enforce the same non-zero executor", "integration executor boundary");
+includes(ethBackedSrc20Page, "SRC20 total supply == vault ETH liability <= vault ETH balance", "bridge solvency invariant");
+includes(ethBackedSrc20Page, "require(tx.executor == reserveVault);", "bridge executor authorization");
+includes(ethBackedSrc20Page, "authorizedExecutor: reserveVaultAddress", "bridge Action binding");
+includes(ethBackedSrc20Page, "value: amount + vmEthAmount", "bridge deposit value separation");
+includes(ethBackedSrc20Page, "value: vmEthAmount", "bridge redemption execution value");
+includes(atomicMarketPage, "require(tx.executor == market);", "market executor authorization");
+includes(atomicMarketPage, "actual SRC20 escrow balance >= accounted token liability", "market escrow invariant");
+includes(atomicMarketPage, "authorizedExecutor: marketAddress", "market Action binding");
+
+const documentedContextValues = [
+  "msg.sender",
+  "this.id",
+  "tx.actor",
+  "tx.router",
+  "tx.executor",
+  "tx.recipient",
+  "world.id",
+  "world.executionHeight",
+  "buy.ethIn",
+  "buy.grossTokenOut",
+  "buy.tickAfter",
+  "block.number",
+  "block.timestamp",
+  "gas.bytePrice",
+  "gas.bytesUsed",
+  "gas.bytesRemaining"
+];
+for (const value of documentedContextValues) {
+  includes(svmContextPage, `\`${value}\``, `SVM context ${value}`);
+}
+includes(svmContextPage, "At the root, `msg.sender == tx.actor`", "root caller semantics");
+includes(svmContextPage, "`tx.executor` | EVM staticCall caller", "staticCall executor semantics");
 
 for (const entry of npmRelease.packages) {
   const sourcePackage = [tinySolPackage, receiptPackage, cliPackage].find((candidate) => candidate.name === entry.name);

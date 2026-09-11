@@ -20,19 +20,19 @@ The `worldId` is derived from the bound pool's Pool ID. Every program, account, 
 | Where it lives | EVM and the Uniswap v4 pool | SVM program state |
 | How it is acquired | The outer swap | Program-defined minting, transfer, or settlement |
 | Rules | ERC-20 and pool semantics | Immutable program code |
-| Examples | A World's native token | SRC20, app points, market positions |
+| Examples | A World's native token | SRC20, app points, program state |
 
 These assets do not share balance semantics. An SVM program cannot modify the real World token's transfer rules or control its sell path.
 
 ## Programs define applications
 
-The Kernel provides execution, storage, calls, metering, and Events. It does not hardcode a particular asset or market model. SRC20, the sETH bridge, and the market are implemented as programs plus narrowly bound EVM components.
+The Kernel provides execution, storage, calls, metering, and Events. It does not hardcode a particular asset or application model. SRC20 and future applications are implemented as programs, optionally with narrowly bound EVM components.
 
 A program's identity is established by its deployment package, code hash, and ABI. Matching an event name or function selector does not make two programs equivalent.
 
 ## Applications are programs
 
-Applications inherit the World boundary but define their own rules. SRC20, the sETH bridge, and markets are examples built with programs and narrowly bound EVM components; they are not privileged cases embedded in the Kernel. Studio is a developer interface to this same runtime, not a separate execution environment.
+Applications inherit the World boundary but define their own rules. SRC20 and future applications are not privileged cases embedded in the Kernel, and developer interfaces do not create separate execution environments.
 
 See [What Can Be Built](/protocol/use-cases) for the application design space.
 

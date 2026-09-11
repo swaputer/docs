@@ -84,6 +84,3 @@ identity rather than using that output as an integrity check.
 - Treat a compiler upgrade as an artifact change: rebuild and re-verify every package, ABI, source map, and code hash.
 - Verify program identity and the active deployment manifest independently of the npm package name.
 - Keep RPC credentials in environment variables or a secret manager; never place them in a URL passed on the command line.
-
-The original `@swaputer/*` package versions were withdrawn. New integrations
-must use the `@swaputer-labs/*` names above.

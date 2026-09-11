@@ -88,7 +88,7 @@ const actionNonce = await kernel.nonces(worldId, actorId);
 
 ## 5. Simulate and set the budget
 
-Before deployment, run the same package and constructor arguments in Studio or the TinySol simulator. The simulation input must describe the current target World snapshot, including:
+Before deployment, run the same package and constructor arguments in the TinySol simulator. The simulation input must describe the current target World snapshot, including:
 
 - `worldId`, execution height, and `byteGasPrice`;
 - block and buy context;
@@ -168,7 +168,7 @@ const tx = await swaputerRouter.buyVMExactInput(
   { value: exactEthAmountIn }
 );
 const requiredConfirmations = releaseManifest.indexer.confirmations;
-if (!Number.isSafeInteger(requiredConfirmations) || requiredConfirmations < 12) {
+if (!Number.isSafeInteger(requiredConfirmations) || requiredConfirmations < 1) {
   throw new Error("Invalid release confirmation policy");
 }
 
@@ -190,17 +190,16 @@ if (!canonicalReceipt
 }
 ```
 
-`msg.value` must equal the signed `exactEthAmountIn`, and the Swaputer Router's price-limit argument must equal the signed value. This example intentionally uses the executor-bound Swaputer Router path. Studio and Minter may instead use the direct Universal Router binding described in [Actions & Signatures](/developers/actions#routing-modes).
+`msg.value` must equal the signed `exactEthAmountIn`, and the Swaputer Router's price-limit argument must equal the signed value. In this example the user calls the Swaputer Router directly and authorizes their own address as executor. A compatible client may instead use the direct Universal Router path, while a contract-mediated flow authorizes its EVM application. Every state-changing route reaches the same Hook, Kernel, and SVM; see [Actions & Signatures](/developers/actions#routing-modes).
 
 ## 8. Verify the deployment
 
-Do not treat submission or a one-block receipt as final. The bundled Base
-Sepolia release requires 12 confirmations; applications should read that value
-from the authenticated release manifest, then re-read the transaction, receipt,
-and containing block by height as shown above. If any result is missing or
-contradictory, preserve the transaction hash for reconciliation and do not
-blindly retry. After canonical confirmation, do not rely on a success toast
-alone:
+Do not treat submission alone as confirmation. The bundled Base Sepolia release
+requires one confirmation; applications should read that value from the active
+release manifest, then re-read the transaction, receipt, and containing block by
+height as shown above. If any result is missing or contradictory, preserve the
+transaction hash for reconciliation and do not blindly retry. After canonical
+confirmation, do not rely on a success toast alone:
 
 ```ts
 const deployedHash = await kernel.programCodeHash(worldId, programId);

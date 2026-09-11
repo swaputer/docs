@@ -69,16 +69,18 @@ State variables occupy full 32-byte slots in declaration order; no storage packi
 
 ## Execution context
 
-Programs can read a protocol-controlled, read-only context:
+Programs can read protocol-controlled identity, route, World, buy, block, and metering context:
 
-- `msg.sender`, `this.id`, `tx.actor`
-- `world.id`, `world.executionHeight`
-- `buy.ethIn`, `buy.grossTokenOut`, `buy.tickAfter`
-- `gas.bytePrice`, `gas.bytesUsed`, `gas.bytesRemaining`
-- `block.number`, `block.timestamp`
-- `tx.router`, `tx.executor`, `tx.recipient`
+- caller: `msg.sender`, `this.id`, `tx.actor`;
+- EVM route: `tx.router`, `tx.executor`, `tx.recipient`;
+- World: `world.id`, `world.executionHeight`;
+- execution buy: `buy.ethIn`, `buy.grossTokenOut`, `buy.tickAfter`;
+- EVM block: `block.number`, `block.timestamp`;
+- SVM meter: `gas.bytePrice`, `gas.bytesUsed`, `gas.bytesRemaining`.
 
-The Kernel constructs these values and preserves them across nested calls. Programs cannot override them.
+The Kernel constructs these values and programs cannot override them. Transaction-wide fields are preserved across nested calls, while `msg.sender` changes to the immediate calling Program ID. Read-only EVM calls use a special zero-buy context.
+
+See [SVM Context Reference](/developers/svm-context) for every field's type and exact behavior during root CALL, DEPLOY, nested calls, program creation, and `Kernel.staticCall`.
 
 ## Events
 

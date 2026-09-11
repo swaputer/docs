@@ -103,9 +103,10 @@ A successful simulation returns bytes executed, return data, storage changes, de
 ## Next steps
 
 1. Follow [Build Your First Program](/developers/first-program) to deploy and call Counter.
-2. Read [Actions & Signatures](/developers/actions) to understand every EIP-712 binding.
-3. Use [Verify a Deployment](/developers/deployments) to authenticate the target World.
-4. See [npm Tooling Packages](/developers/tooling-packages) for the compiler API, receipt codec, and read-only transaction verifier.
+2. Use [Build a Swaputer Client](/developers/frontend-integration) to implement quoting, signing, submission, and transaction reconciliation.
+3. Read [Actions & Signatures](/developers/actions) to understand every EIP-712 binding.
+4. Use [Verify a Deployment](/developers/deployments) to authenticate the target World.
+5. See [npm Tooling Packages](/developers/tooling-packages) for the compiler API, receipt codec, and read-only transaction verifier.
 
 ::: warning Consistency requirement
 A successful compilation does not guarantee successful onchain execution. Before signing, refresh the nonce, price limit, buy amount, and World state, then simulate or set a conservative budget against that same input set.

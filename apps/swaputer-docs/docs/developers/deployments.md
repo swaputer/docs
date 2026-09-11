@@ -29,7 +29,7 @@ A single address cannot tell a client whether:
 - an ABI belongs to the deployed `ProgramPackage`;
 - a record is the recommended release or a historical deployment.
 
-Frontend configuration, Studio, indexers, and deployment scripts should derive their values from the same release object instead of maintaining independent sets of constants.
+Frontend configuration, developer tools, indexers, and deployment scripts should derive their values from the same release object instead of maintaining independent sets of constants.
 
 Transaction success follows the same rule. Wait for the manifest's confirmation
 count, then re-read the receipt and transaction by hash and the containing block
@@ -95,7 +95,7 @@ When updating that pointer:
 
 1. publish a new immutable manifest;
 2. independently reconstruct addresses, Pool ID, config hash, and runtime code hashes;
-3. update the release pointer used by frontends, Studio, and indexers;
+3. update the release pointer used by frontends, developer tools, and indexers;
 4. retain old manifests and their transaction evidence;
 5. create a new World boundary for an incompatible VM, ISA, or signature version.
 
