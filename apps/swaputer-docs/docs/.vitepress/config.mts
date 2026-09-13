@@ -6,7 +6,7 @@ export default defineConfig({
   description: "Swaputer turns Uniswap v4 pools into programmable onchain worlds. Learn the protocol, SVM, and TinySol.",
   cleanUrls: true,
   lastUpdated: true,
-  appearance: "dark",
+  appearance: false,
   vite: {
     server: {
       allowedHosts: ["nominated-marijuana-paul-luck.trycloudflare.com"]
@@ -14,7 +14,7 @@ export default defineConfig({
   },
   head: [
     ["link", { rel: "icon", type: "image/png", href: "/swaputer-mark.png" }],
-    ["meta", { name: "theme-color", content: "#111111" }]
+    ["meta", { name: "theme-color", content: "#ff37c7" }]
   ],
   themeConfig: {
     logo: "/swaputer-mark.png",
@@ -70,7 +70,7 @@ export default defineConfig({
     outline: { level: [2, 3], label: "On this page" },
     docFooter: { prev: "Previous page", next: "Next page" },
     lastUpdated: { text: "Last updated" },
-    darkModeSwitchLabel: "Appearance",
+    // Appearance switch disabled in docs via `appearance: false`
     sidebarMenuLabel: "Menu",
     returnToTopLabel: "Back to top",
     footer: {
