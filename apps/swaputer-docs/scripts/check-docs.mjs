@@ -51,11 +51,13 @@ const [
   cliPackage,
   npmRelease,
   npmPublication,
+  tinySolCandidate,
   docsPackage,
   quickstartPage,
   actionsPage,
   eventsPage,
   toolingPackagesPage,
+  tinySolPage,
   firstProgramPage,
   evmSvmGuidePage,
   svmContextPage,
@@ -72,11 +74,13 @@ const [
   json("tooling/cli/package.json"),
   json(".deps/protocol/.deps/tooling/release/npm/packages.json"),
   json(".deps/protocol/.deps/tooling/release/npm/swaputer-labs-publication.json"),
+  json(".deps/protocol/.deps/tooling/release/npm/tinysol-0.4.0.json"),
   json("apps/swaputer-docs/package.json"),
   text("apps/swaputer-docs/docs/developers/quickstart.md"),
   text("apps/swaputer-docs/docs/developers/actions.md"),
   text("apps/swaputer-docs/docs/developers/events-indexing.md"),
   text("apps/swaputer-docs/docs/developers/tooling-packages.md"),
+  text("apps/swaputer-docs/docs/developers/tinysol.md"),
   text("apps/swaputer-docs/docs/developers/first-program.md"),
   text("apps/swaputer-docs/docs/developers/evm-svm-integration.md"),
   text("apps/swaputer-docs/docs/developers/svm-context.md"),
@@ -129,7 +133,13 @@ assert.equal(docsPackage.name, "@swaputer/docs");
 assert.equal(docsPackage.private, true);
 const publishedCli = npmRelease.packages.find((entry) => entry.name === cliPackage.name);
 assert.ok(publishedCli, "public CLI release is missing");
-includes(quickstartPage, `npm install --save-dev ${tinySolPackage.name}@${tinySolPackage.version}`, "public TinySol install");
+const publishedTinySol = npmRelease.packages.find((entry) => entry.name === tinySolPackage.name);
+assert.ok(publishedTinySol, "public TinySol release is missing");
+assert.equal(tinySolCandidate.status, "prepared-not-published");
+const candidateTinySol = tinySolCandidate.packages.find((entry) => entry.name === tinySolPackage.name);
+assert.ok(candidateTinySol, "TinySol candidate release is missing");
+assert.equal(candidateTinySol.version, tinySolPackage.version, "TinySol candidate/source version drift");
+includes(quickstartPage, `npm install --save-dev ${publishedTinySol.name}@${publishedTinySol.version}`, "public TinySol install");
 includes(eventsPage, `npm install ${receiptPackage.name}@${receiptPackage.version}`, "public receipt codec install");
 includes(eventsPage, `npx ${publishedCli.name}@${publishedCli.version} inspect`, "public verifier invocation");
 includes(eventsPage, 'from "@swaputer-labs/receipt-codec";', "receipt codec package scope");
@@ -140,6 +150,11 @@ assert.ok(!toolingPackagesPage.includes("@swaputer-labs/cli/browser"), "unpublis
 includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and `tinysol` CLI", "TinySol runtime and module boundary");
 includes(toolingPackagesPage, "Node.js `>=20`; ESM-only API", "receipt codec runtime and module boundary");
 includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export", "CLI runtime and module boundary");
+for (const syntax of ["`T[<=N]`", "`bytes<N>`", "`string<N>`", "`break`", "`continue`", "`tinysol.lock.json`"]) {
+  includes(tinySolPage, syntax, `TinySol v1.1 syntax ${syntax}`);
+}
+includes(tinySolPage, "prepared, not-yet-published `0.4.0` candidate", "TinySol candidate status");
+assert.ok(!tinySolPage.includes("does not provide dynamic arrays, strings, dynamic bytes"), "stale TinySol limits remain");
 includes(firstProgramPage, "npm install ethers@6.17.0", "first-program ethers dependency");
 includes(evmSvmGuidePage, "The application and program enforce the same non-zero executor", "integration executor boundary");
 includes(ethBackedSrc20Page, "SRC20 total supply == vault ETH liability <= vault ETH balance", "bridge solvency invariant");
@@ -180,6 +195,8 @@ for (const entry of npmRelease.packages) {
   assert.ok(sourcePackage, `unknown npm release package ${entry.name}`);
   if (entry.name === cliPackage.name) {
     assert.match(cliPackage.version, /^0\.1\.3-dev\.\d+$/, "private CLI source must remain distinguishable from public 0.1.2");
+  } else if (entry.name === tinySolPackage.name) {
+    assert.equal(candidateTinySol.version, tinySolPackage.version, "TinySol candidate/source version drift");
   } else {
     assert.equal(sourcePackage.version, entry.version, `${entry.name} release version drift`);
   }

@@ -13,6 +13,13 @@ examples below pin that exact version so a later compiler release cannot change
 the generated package unexpectedly.
 :::
 
+::: warning TinySol 0.4 candidate
+Language v1.1 syntax—including `T[<=N]`, `bytes<N>`, `string<N>`, multidimensional
+arrays, struct mapping fields, and `break`/`continue`—belongs to the reviewed but
+not-yet-published `0.4.0` candidate. Use the repository-generated tarball for candidate testing;
+do not request `@swaputer-labs/tinysol@0.4.0` from npm until publication is recorded.
+:::
+
 Create a project and install the compiler locally:
 
 ```sh
@@ -107,6 +114,7 @@ A successful simulation returns bytes executed, return data, storage changes, de
 3. Read [Actions & Signatures](/developers/actions) to understand every EIP-712 binding.
 4. Use [Verify a Deployment](/developers/deployments) to authenticate the target World.
 5. See [npm Tooling Packages](/developers/tooling-packages) for the compiler API, receipt codec, and read-only transaction verifier.
+6. See [TinySol](/developers/tinysol) for the complete current syntax and bounded ABI rules.
 
 ::: warning Consistency requirement
 A successful compilation does not guarantee successful onchain execution. Before signing, refresh the nonce, price limit, buy amount, and World state, then simulate or set a conservative budget against that same input set.
