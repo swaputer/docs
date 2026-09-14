@@ -1,0 +1,6 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "swaputer-docs",
+  "pages_build_output_dir": "./docs/.vitepress/dist",
+  "compatibility_date": "2026-09-14"
+}

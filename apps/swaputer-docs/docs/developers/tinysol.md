@@ -3,10 +3,9 @@
 TinySol is a statically typed contract language for the SVM. Its deliberately small surface area makes compiled code, ABIs, storage layouts, and program identities independently reproducible.
 
 ::: info Compiler release status
-The public npm compiler remains `@swaputer-labs/tinysol@0.3.2`. The current source line is the
-prepared, not-yet-published `0.4.0` candidate implementing language v1.1. Syntax marked v1.1 below
-requires that reviewed candidate and must not be assumed available from the npm registry until a
-separate publication record exists.
+The public npm compiler is `@swaputer-labs/tinysol@0.4.0`. It implements language v1.1 while
+retaining `ProgramPackageV1`, SwapVM ISA v2, and byte-exact compatibility for the frozen legacy-v1
+corpus.
 :::
 
 ## Minimal program

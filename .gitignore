@@ -5,5 +5,6 @@
 !.env.example
 **/node_modules/
 **/dist/
+.wrangler/
 apps/swaputer-docs/docs/.vitepress/cache/
 apps/swaputer-docs/docs/.vitepress/dist/

@@ -28,7 +28,7 @@ uint32_be(packageLength) || ProgramPackageV1 || abiEncodedConstructorArguments
 
 `packageLength` is a four-byte big-endian integer. Constructor arguments have no function selector.
 Every TinySol scalar is encoded as one 32-byte ABI word. Fixed arrays and structs flatten into a
-deterministic sequence of scalar words. In the TinySol `0.4.0` candidate, `T[<=N]`, `bytes<N>`, and
+deterministic sequence of scalar words. In TinySol `0.4.0`, `T[<=N]`, `bytes<N>`, and
 `string<N>` remain static too: one length word followed by all `N` capacity words. They do not use
 Solidity's offset-and-tail dynamic ABI encoding.
 

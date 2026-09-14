@@ -6,7 +6,7 @@ release configuration.
 
 | Package | Current release | Runtime and module boundary | Purpose |
 | --- | --- | --- | --- |
-| [`@swaputer-labs/tinysol`](https://www.npmjs.com/package/@swaputer-labs/tinysol/v/0.3.2) | `0.3.2` | Node.js `>=22`; ESM-only API and `tinysol` CLI | TinySol compiler, assembler, simulator, fee estimator, and offline CLI |
+| [`@swaputer-labs/tinysol`](https://www.npmjs.com/package/@swaputer-labs/tinysol/v/0.4.0) | `0.4.0` | Node.js `>=22`; ESM-only API and `tinysol` CLI | TinySol compiler, assembler, simulator, fee estimator, and offline CLI |
 | [`@swaputer-labs/receipt-codec`](https://www.npmjs.com/package/@swaputer-labs/receipt-codec/v/0.1.2) | `0.1.2` | Node.js `>=20`; ESM-only API | Strict, dependency-free `VMReceiptV1` encoder and decoder |
 | [`@swaputer-labs/cli`](https://www.npmjs.com/package/@swaputer-labs/cli/v/0.1.2) | `0.1.2` | Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export | Read-only verifier for Swaputer transactions and receipt payloads |
 
@@ -15,22 +15,21 @@ release configuration.
 Published identities are immutable. The three source workspaces are not all on the same release
 line:
 
-| Package | Public npm identity | Current source/candidate | Effect of TinySol v1.1 |
+| Package | Public npm identity | Current source line | Effect of TinySol v1.1 |
 | --- | --- | --- | --- |
-| `@swaputer-labs/tinysol` | `0.3.2` | `0.4.0` prepared, not published | Adds bounded `string<N>`, `bytes<N>`, `T[<=N]`, richer arrays/structs/control flow, and pinned npm-style imports |
+| `@swaputer-labs/tinysol` | `0.4.0` | `0.4.0` | Adds bounded `string<N>`, `bytes<N>`, `T[<=N]`, richer arrays/structs/control flow, and pinned npm-style imports |
 | `@swaputer-labs/receipt-codec` | `0.1.2` | `0.1.2` | No format change; `VMReceiptV1` is independent of source-language types |
 | `@swaputer-labs/cli` | `0.1.2` | `0.1.3-dev.0` private source | Can verify resulting transactions because it authenticates receipts and program identity, not source syntax |
 
-Do not install an unpublished identity from the registry or replace an existing public version. A
-candidate tarball must be prepared, inspected, tested in an empty project, and published under a new
-immutable version before public installation instructions change.
+Published identities are immutable. Pin exact versions and review generated program artifacts when
+upgrading the compiler.
 
 ## Install the libraries
 
 Pin exact versions in applications and release builds:
 
 ```sh
-npm install @swaputer-labs/tinysol@0.3.2 \
+npm install @swaputer-labs/tinysol@0.4.0 \
   @swaputer-labs/receipt-codec@0.1.2
 ```
 
@@ -48,9 +47,8 @@ console.log(result.packageBytes);
 console.log(result.abi);
 ```
 
-The public `0.3.2` compiler accepts the v1 surface. Repository maintainers testing v1.1 must install
-the reviewed local `0.4.0` tarball instead; see [TinySol](/developers/tinysol) for its syntax and
-static bounded-ABI rules.
+The public `0.4.0` compiler accepts both the frozen legacy-v1 surface and language v1.1; see
+[TinySol](/developers/tinysol) for its syntax and static bounded-ABI rules.
 
 The receipt codec rejects an invalid or incomplete payload before returning any
 records:
@@ -67,7 +65,7 @@ console.log(receipt.worldExecution.executedBytes);
 Run a pinned TinySol command without a global installation:
 
 ```sh
-npx @swaputer-labs/tinysol@0.3.2 --help
+npx @swaputer-labs/tinysol@0.4.0 --help
 ```
 
 Install the transaction verifier globally, or invoke the pinned package with

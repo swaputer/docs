@@ -8,23 +8,17 @@ This page covers the shortest path from TinySol source to a verifiable artifact 
 - npm
 
 ::: info Public compiler release
-`@swaputer-labs/tinysol@0.3.2` is available from the public npm registry. The
-examples below pin that exact version so a later compiler release cannot change
-the generated package unexpectedly.
-:::
-
-::: warning TinySol 0.4 candidate
-Language v1.1 syntax—including `T[<=N]`, `bytes<N>`, `string<N>`, multidimensional
-arrays, struct mapping fields, and `break`/`continue`—belongs to the reviewed but
-not-yet-published `0.4.0` candidate. Use the repository-generated tarball for candidate testing;
-do not request `@swaputer-labs/tinysol@0.4.0` from npm until publication is recorded.
+`@swaputer-labs/tinysol@0.4.0` is available from the public npm registry. It includes language v1.1
+syntax such as `T[<=N]`, `bytes<N>`, `string<N>`, multidimensional arrays, struct mapping fields,
+and `break`/`continue`. The examples below pin the exact compiler version so a later release cannot
+change generated packages unexpectedly.
 :::
 
 Create a project and install the compiler locally:
 
 ```sh
 npm init -y
-npm install --save-dev @swaputer-labs/tinysol@0.3.2
+npm install --save-dev @swaputer-labs/tinysol@0.4.0
 ```
 
 Create `Counter.tiny.sol`:
