@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880" role="img" aria-labelledby="title desc" data-theme="light">
   <title id="title">Swaputer execution and atomic settlement</title>
   <desc id="desc">ETH and a signed Action enter an executable buy. The Hook, Kernel, and SVM process it. Net tokens, state, fee burn, and Events settle together, while a failure at any stage reverts everything.</desc>
   <defs>

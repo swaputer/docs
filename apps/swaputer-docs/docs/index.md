@@ -13,7 +13,7 @@ Each World is an independent execution environment defined by a Uniswap v4 pool,
 - **The SVM hosts applications.** Programs can own state, call one another, and emit Events.
 - **The World token pays for execution.** Fees are metered by bytes actually executed and burned from the tokens bought in that transaction.
 
-![A Swaputer World connects a Uniswap v4 pool to the Kernel, SVM, programs, state, and Events.](/images/protocol-overview.svg)
+![A Swaputer World connects a Uniswap v4 pool to the Kernel, SVM, programs, state, and Events.](/images/protocol-overview-light-v2.svg)
 
 ## One atomic loop
 

@@ -2,7 +2,7 @@
 
 A stateful Swaputer operation is triggered by one signed Action and one exact-input ETH → World token buy.
 
-![A signed Action and ETH input pass through the Hook, Kernel, and SVM before all results settle atomically.](/images/world-transaction-flow.svg)
+![A signed Action and ETH input pass through the Hook, Kernel, and SVM before all results settle atomically.](/images/world-transaction-flow-light-v2.svg)
 
 ## Execution flow
 
