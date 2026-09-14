@@ -32,14 +32,4 @@ Programs can maintain shared state for games, collective decisions, memberships,
 
 The World supplies a common history and economic entry point. The application decides what players can do, which state transitions are valid, and how assets or rights move between accounts.
 
-## New onchain mechanisms
-
-The most important use cases may not resemble today's token or DeFi interfaces. A developer can combine signed Actions, deterministic programs, persistent state, nested calls, and atomic settlement into mechanisms that are native to the World itself.
-
-Swaputer's role is to keep that design space open while preserving hard boundaries: programs cannot rewrite the real World token, intercept its sell path, escape their storage namespace, or make arbitrary EVM calls.
-
-## Applications remain independent
-
-Wallets, asset interfaces, deployment tools, exchanges, games, and custody applications can exercise different parts of the protocol. They are clients and gateways—not the definition of Swaputer. No frontend or application receives a privileged Kernel execution path.
-
-Developers can begin with [Build Your First Program](/developers/first-program). Readers evaluating the boundary should continue to [Security & Trust Model](/protocol/security).
+Developers can begin with [Build Your First Program](/developers/first-program). See [Security & Trust Model](/protocol/security) for the guarantees and risks shared by every application category.

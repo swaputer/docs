@@ -2,11 +2,7 @@
 
 TinySol is a statically typed contract language for the SVM. Its deliberately small surface area makes compiled code, ABIs, storage layouts, and program identities independently reproducible.
 
-::: info Compiler release status
-The public npm compiler is `@swaputer-labs/tinysol@0.4.0`. It implements language v1.1 while
-retaining `ProgramPackageV1`, SwapVM ISA v2, and byte-exact compatibility for the frozen legacy-v1
-corpus.
-:::
+The current public compiler is `@swaputer-labs/tinysol@0.4.0` and implements TinySol language v1.1.
 
 ## Minimal program
 
@@ -182,11 +178,11 @@ A custom program can emit an Event shaped like a standard `Transfer`, but a name
 
 ## Current limits
 
-TinySol does not provide unbounded arrays, Solidity dynamic-ABI `string`/`bytes`, recursive structs,
-nested mapping values, inheritance, modifiers, function overloading, runtime recursion, proxy
-upgrades, `delegatecall`, arbitrary EVM calls, exception handling, floating-point values, unbounded
-dynamic memory allocation, inline assembly, dynamic libraries, or mutable library state. Bounded
-capacities and fixed-array dimensions are each limited to 256; recursively flattened static shapes
-are limited to 65,536 words, and contract ABI input/output positions are limited to 32 words.
+TinySol deliberately keeps allocation and linking static:
+
+- collections require an explicit capacity of at most 256, and fixed-array dimensions are also limited to 256;
+- flattened static shapes are limited to 65,536 words, with at most 32 ABI input or output positions;
+- recursive structs, nested mapping values, unbounded memory, runtime recursion, dynamic libraries, and mutable library state are unsupported;
+- Solidity features such as inheritance, modifiers, overloading, proxy upgrades, `delegatecall`, arbitrary EVM calls, exceptions, floating point, and inline assembly are outside the language.
 
 These constraints are part of the current verifiable compilation boundary. Do not disguise unsupported syntax through preprocessing, and do not assume that a future language version will preserve the same ABI or storage layout.

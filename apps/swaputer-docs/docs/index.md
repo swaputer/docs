@@ -2,11 +2,7 @@
 
 > Swaputer turns a Uniswap v4 liquidity pool into a programmable onchain world.
 
-Blockchains usually ask liquidity and applications to live beside one another. A token trades in one system, while the logic that gives it purpose runs somewhere else. Swaputer brings those two layers into one atomic environment.
-
-Uniswap gives assets a market. Hooks let protocols extend what happens at the edge of a swap. Swaputer uses that edge to introduce a deterministic execution layer: when a user buys a World token, the same transaction can deploy or call an SVM program. The swap, program state, execution fee, and emitted Events settle together.
-
-Liquidity becomes more than infrastructure around an application. It becomes the doorway into a shared execution environment.
+Swaputer uses a Uniswap v4 Hook to connect liquidity with deterministic program execution. When a user buys a World token, the same transaction can deploy or call an SVM program; the swap, program state, execution fee, and Events settle together.
 
 ## From a pool to a World
 
@@ -75,23 +71,7 @@ These applications share the protocol's execution and settlement guarantees, but
 
 ## Where to go next
 
-To understand the protocol and its design:
-
-- [Architecture in 5 Minutes](/architecture): the complete system on one page
-- [Core Model](/protocol/overview): Worlds, assets, and application boundaries
-- [Execution & Settlement](/protocol/execution): Actions, swaps, metering, and atomicity
-- [Security & Trust Model](/protocol/security): immutable boundaries, authorization, and residual risk
-
-To start building:
-
-- [Developer Quickstart](/developers/quickstart): install, compile, and verify the toolchain
-- [Build Your First Program](/developers/first-program): go from TinySol source to deployment, calls, and reads
-- [Build a Swaputer Client](/developers/frontend-integration): quote, simulate, sign, submit, and reconcile transactions
-- [SVM Context Reference](/developers/svm-context): understand callers, actors, executors, buy context, and metering
-- [Actions & Signatures](/developers/actions): construct a valid onchain execution intent
-- [Integrate EVM and SVM](/developers/evm-svm-integration): coordinate an EVM application contract with an SVM transition
-
-To study complete application patterns:
-
-- [Build an ETH-Backed SRC20](/patterns/eth-backed-src20): deposits, minting, burning, redemption, and backing invariants
-- [Build an Atomic ETH/SRC20 Market](/patterns/atomic-market): EVM ETH custody, SVM token escrow, and atomic settlement
+- [Architecture in 5 Minutes](/architecture) for the complete system model.
+- [Developer Quickstart](/developers/quickstart) and [Build Your First Program](/developers/first-program) to start coding.
+- [Integrate EVM and SVM](/developers/evm-svm-integration) for applications that coordinate both execution domains.
+- [Security & Trust Model](/protocol/security) before handling assets of value.

@@ -10,20 +10,6 @@ release configuration.
 | [`@swaputer-labs/receipt-codec`](https://www.npmjs.com/package/@swaputer-labs/receipt-codec/v/0.1.2) | `0.1.2` | Node.js `>=20`; ESM-only API | Strict, dependency-free `VMReceiptV1` encoder and decoder |
 | [`@swaputer-labs/cli`](https://www.npmjs.com/package/@swaputer-labs/cli/v/0.1.2) | `0.1.2` | Node.js `>=22`; ESM-only API and Node.js CLIs; no browser export | Read-only verifier for Swaputer transactions and receipt payloads |
 
-## Public releases and current source lines
-
-Published identities are immutable. The three source workspaces are not all on the same release
-line:
-
-| Package | Public npm identity | Current source line | Effect of TinySol v1.1 |
-| --- | --- | --- | --- |
-| `@swaputer-labs/tinysol` | `0.4.0` | `0.4.0` | Adds bounded `string<N>`, `bytes<N>`, `T[<=N]`, richer arrays/structs/control flow, and pinned npm-style imports |
-| `@swaputer-labs/receipt-codec` | `0.1.2` | `0.1.2` | No format change; `VMReceiptV1` is independent of source-language types |
-| `@swaputer-labs/cli` | `0.1.2` | `0.1.3-dev.0` private source | Can verify resulting transactions because it authenticates receipts and program identity, not source syntax |
-
-Published identities are immutable. Pin exact versions and review generated program artifacts when
-upgrading the compiler.
-
 ## Install the libraries
 
 Pin exact versions in applications and release builds:
@@ -47,8 +33,7 @@ console.log(result.packageBytes);
 console.log(result.abi);
 ```
 
-The public `0.4.0` compiler accepts both the frozen legacy-v1 surface and language v1.1; see
-[TinySol](/developers/tinysol) for its syntax and static bounded-ABI rules.
+See [TinySol](/developers/tinysol) for the language syntax and bounded ABI rules.
 
 The receipt codec rejects an invalid or incomplete payload before returning any
 records:
@@ -81,23 +66,16 @@ npx @swaputer-labs/cli@0.1.2 --help
 The verifier is intentionally read-only. It fetches a receipt from an RPC URL
 stored in a named environment variable, verifies the configured network,
 Kernel, World, outer `Events` envelope, and complete receipt, then emits text or
-JSON. It never loads a wallet, signs, or submits a transaction.
+JSON. It never loads a wallet, signs, or submits a transaction. Browser
+applications should use the receipt codec directly; the CLI has no browser
+entry point.
 
-`@swaputer-labs/cli@0.1.2` is a Node.js command-line package. It does not expose
-a browser entry point. Browser applications should use the public receipt codec
-directly and provide their own transport/UI adapter; do not import undocumented
-package subpaths.
-
-::: info CLI version display
-The npm manifest and registry integrity identify the current package as
-`0.1.2`. Its legacy `swaputer --version` output displays `0.1.1`; this is a
-display-only defect in that immutable release. Pin and verify the npm package
-identity rather than using that output as an integrity check.
-:::
+In CLI `0.1.2`, `swaputer --version` reports `0.1.1`. Use the npm package
+identity when checking the installed release.
 
 ## Version and trust boundary
 
 - Commit `package-lock.json` and use `npm ci` for reproducible application builds.
 - Treat a compiler upgrade as an artifact change: rebuild and re-verify every package, ABI, source map, and code hash.
 - Verify program identity and the active deployment manifest independently of the npm package name.
-- Keep RPC credentials in environment variables or a secret manager; never place them in a URL passed on the command line.
+- Keep RPC credentials in environment variables or a secret manager.

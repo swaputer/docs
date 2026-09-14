@@ -148,8 +148,8 @@ includes(eventsPage, `npm install ${receiptPackage.name}@${receiptPackage.versio
 includes(eventsPage, `npx ${publishedCli.name}@${publishedCli.version} inspect`, "public verifier invocation");
 includes(eventsPage, 'from "@swaputer-labs/receipt-codec";', "receipt codec package scope");
 assert.ok(!eventsPage.includes('from "@swaputer/receipt-codec";'), "withdrawn codec scope is still imported");
-includes(toolingPackagesPage, "is a Node.js command-line package", "CLI runtime boundary");
-includes(toolingPackagesPage, "legacy `swaputer --version` output displays `0.1.1`", "CLI display-version notice");
+includes(toolingPackagesPage, "the CLI has no browser", "CLI runtime boundary");
+includes(toolingPackagesPage, "`swaputer --version` reports `0.1.1`", "CLI display-version notice");
 assert.ok(!toolingPackagesPage.includes("@swaputer-labs/cli/browser"), "unpublished CLI browser subpath is documented");
 includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and `tinysol` CLI", "TinySol runtime and module boundary");
 includes(toolingPackagesPage, "Node.js `>=20`; ESM-only API", "receipt codec runtime and module boundary");
@@ -157,7 +157,10 @@ includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and Node.js CLIs; no
 for (const syntax of ["`T[<=N]`", "`bytes<N>`", "`string<N>`", "`break`", "`continue`", "`tinysol.lock.json`"]) {
   includes(tinySolPage, syntax, `TinySol v1.1 syntax ${syntax}`);
 }
-includes(tinySolPage, "public npm compiler is `@swaputer-labs/tinysol@0.4.0`", "TinySol release status");
+includes(tinySolPage, "current public compiler is `@swaputer-labs/tinysol@0.4.0`", "TinySol release status");
+assert.ok(!tinySolPage.includes("frozen legacy-v1 corpus"), "internal compatibility evidence leaked into the language guide");
+assert.ok(!toolingPackagesPage.includes("Current source line"), "private source release lines leaked into public package docs");
+assert.ok(!toolingPackagesPage.includes("private source"), "private source status leaked into public package docs");
 includes(toolingPackagesPage, `${publishedTinySol.name}@${publishedTinySol.version}`, "TinySol pinned install");
 includes(toolingPackagesPage, `/package/${publishedTinySol.name}/v/${publishedTinySol.version}`, "TinySol npm link");
 assert.ok(!tinySolPage.includes("does not provide dynamic arrays, strings, dynamic bytes"), "stale TinySol limits remain");

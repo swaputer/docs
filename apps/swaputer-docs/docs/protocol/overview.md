@@ -30,10 +30,6 @@ The Kernel provides execution, storage, calls, metering, and Events. It does not
 
 A program's identity is established by its deployment package, code hash, and ABI. Matching an event name or function selector does not make two programs equivalent.
 
-## Applications are programs
-
-Applications inherit the World boundary but define their own rules. SRC20 and future applications are not privileged cases embedded in the Kernel, and developer interfaces do not create separate execution environments.
-
 See [What Can Be Built](/protocol/use-cases) for the application design space.
 
 ## Version boundaries

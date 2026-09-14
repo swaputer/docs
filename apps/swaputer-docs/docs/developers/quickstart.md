@@ -7,13 +7,6 @@ This page covers the shortest path from TinySol source to a verifiable artifact 
 - Node.js 22 or later
 - npm
 
-::: info Public compiler release
-`@swaputer-labs/tinysol@0.4.0` is available from the public npm registry. It includes language v1.1
-syntax such as `T[<=N]`, `bytes<N>`, `string<N>`, multidimensional arrays, struct mapping fields,
-and `break`/`continue`. The examples below pin the exact compiler version so a later release cannot
-change generated packages unexpectedly.
-:::
-
 Create a project and install the compiler locally:
 
 ```sh
@@ -105,10 +98,7 @@ A successful simulation returns bytes executed, return data, storage changes, de
 
 1. Follow [Build Your First Program](/developers/first-program) to deploy and call Counter.
 2. Use [Build a Swaputer Client](/developers/frontend-integration) to implement quoting, signing, submission, and transaction reconciliation.
-3. Read [Actions & Signatures](/developers/actions) to understand every EIP-712 binding.
-4. Use [Verify a Deployment](/developers/deployments) to authenticate the target World.
-5. See [npm Tooling Packages](/developers/tooling-packages) for the compiler API, receipt codec, and read-only transaction verifier.
-6. See [TinySol](/developers/tinysol) for the complete current syntax and bounded ABI rules.
+3. Keep [TinySol](/developers/tinysol) and [Actions & Signatures](/developers/actions) open as language and signing references.
 
 ::: warning Consistency requirement
 A successful compilation does not guarantee successful onchain execution. Before signing, refresh the nonce, price limit, buy amount, and World state, then simulate or set a conservative budget against that same input set.

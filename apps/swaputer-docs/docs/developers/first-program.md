@@ -1,8 +1,6 @@
 # Build Your First Program
 
-This guide uses a Counter to connect the complete path: compile TinySol, encode constructor arguments, derive a Program ID, sign an Action, deploy onchain, call the program, and read its state. Examples use ethers v6. Always source live network parameters from a verified release manifest.
-
-The TypeScript examples use the ESM build of an exact ethers release:
+This guide uses a Counter to connect the complete path: compile TinySol, encode constructor arguments, derive a Program ID, sign an Action, deploy onchain, call the program, and read its state. Always source live network parameters from a verified release manifest. The TypeScript examples use ethers v6:
 
 ```sh
 npm install ethers@6.17.0
@@ -190,16 +188,12 @@ if (!canonicalReceipt
 }
 ```
 
-`msg.value` must equal the signed `exactEthAmountIn`, and the Swaputer Router's price-limit argument must equal the signed value. In this example the user calls the Swaputer Router directly and authorizes their own address as executor. A compatible client may instead use the direct Universal Router path, while a contract-mediated flow authorizes its EVM application. Every state-changing route reaches the same Hook, Kernel, and SVM; see [Actions & Signatures](/developers/actions#routing-modes).
+`msg.value` and the Router's price limit must match the signed values. This example uses the Swaputer Router with the actor as executor; see [Routing modes](/developers/actions#routing-modes) for other paths.
 
 ## 8. Verify the deployment
 
-Do not treat submission alone as confirmation. The bundled Base Sepolia release
-requires one confirmation; applications should read that value from the active
-release manifest, then re-read the transaction, receipt, and containing block by
-height as shown above. If any result is missing or contradictory, preserve the
-transaction hash for reconciliation and do not blindly retry. After canonical
-confirmation, do not rely on a success toast alone:
+After canonical confirmation, verify the deployed program rather than relying
+on the transaction status alone:
 
 ```ts
 const deployedHash = await kernel.programCodeHash(worldId, programId);
