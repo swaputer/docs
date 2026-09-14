@@ -17,6 +17,9 @@ served from `https://docs.swaputer.com`:
 npm run deploy:pages
 ```
 
+The Pages `_headers` file applies `Cache-Control: no-transform` so Cloudflare
+does not mistake versioned npm package names for email addresses.
+
 The build pins the official VitePress 2 preview line because the latest stable
 VitePress 1 release resolves to build dependencies currently rejected by
 `npm audit`. Treat this as a build-tool pin: run the drift check, production
