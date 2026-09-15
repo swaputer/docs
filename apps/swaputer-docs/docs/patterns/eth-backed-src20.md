@@ -128,7 +128,7 @@ interface IETHReserve {
     function deposit(
         uint128 amount,
         uint128 vmEthAmount,
-        SwapVMKernel.VMEnvelope calldata envelope,
+        SwaputerKernel.VMEnvelope calldata envelope,
         uint160 sqrtPriceLimitX96
     ) external payable;
 
@@ -136,7 +136,7 @@ interface IETHReserve {
         uint128 amount,
         uint128 vmEthAmount,
         address recipient,
-        SwapVMKernel.VMEnvelope calldata envelope,
+        SwaputerKernel.VMEnvelope calldata envelope,
         uint160 sqrtPriceLimitX96
     ) external payable;
 

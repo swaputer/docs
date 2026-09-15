@@ -19,14 +19,17 @@ export default defineConfig({
   themeConfig: {
     logo: "/swaputer-mark.png",
     siteTitle: "Swaputer",
+    nav: [
+      { text: "Ecosystem", link: "https://swaputer.com" },
+      { text: "Studio", link: "https://studio.swaputer.com" },
+      { text: "Scan", link: "https://scan.swaputer.com" }
+    ],
     sidebar: [
       {
         text: "Start Here",
         items: [
           { text: "What is Swaputer?", link: "/" },
-          { text: "Architecture in 5 Minutes", link: "/architecture" },
-          { text: "Developer Quickstart", link: "/developers/quickstart" },
-          { text: "Build Your First Program", link: "/developers/first-program" }
+          { text: "Architecture in 5 Minutes", link: "/architecture" }
         ]
       },
       {
@@ -42,11 +45,13 @@ export default defineConfig({
       {
         text: "Developer Guides",
         items: [
+          { text: "Address", link: "/developers/deployments" },
+          { text: "Developer Quickstart", link: "/developers/quickstart" },
+          { text: "Build Your First Program", link: "/developers/first-program" },
           { text: "Deploy, Call & Read", link: "/developers/deploy-and-call" },
           { text: "Build a Client", link: "/developers/frontend-integration" },
           { text: "Integrate EVM and SVM", link: "/developers/evm-svm-integration" },
-          { text: "Events & Indexing", link: "/developers/events-indexing" },
-          { text: "Verify a Deployment", link: "/developers/deployments" }
+          { text: "Events & Indexing", link: "/developers/events-indexing" }
         ]
       },
       {

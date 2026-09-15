@@ -33,7 +33,7 @@ Before implementing this boundary, understand:
 - [Swaputer Architecture in 5 Minutes](/architecture);
 - [Actions & Signatures](/developers/actions);
 - [SVM Context Reference](/developers/svm-context);
-- [Verify a Deployment](/developers/deployments).
+- [Address](/developers/deployments).
 
 Use one verified release manifest for the chain, Router, PoolManager, Hook, Kernel, World, VM version, and code hashes.
 
@@ -146,13 +146,13 @@ Signature validity proves that the actor authorized an Action. It does not prove
 
 ```solidity
 function _validateCall(
-    SwapVMKernel.VMEnvelope calldata envelope,
+    SwaputerKernel.VMEnvelope calldata envelope,
     address expectedActor,
     bytes32 expectedProgram,
     address expectedRecipient,
     bytes memory expectedPayload
 ) internal view {
-    if (envelope.op != SwapVMKernel.RootOp.CALL) revert InvalidEnvelope();
+    if (envelope.op != SwaputerKernel.RootOp.CALL) revert InvalidEnvelope();
     if (envelope.worldId != worldId) revert InvalidEnvelope();
     if (envelope.actor != expectedActor) revert InvalidEnvelope();
     if (envelope.targetOrCodeHash != expectedProgram) revert InvalidEnvelope();
@@ -174,7 +174,7 @@ Send only the execution funding to the Router:
 function _runVM(
     uint128 vmEthAmount,
     uint160 sqrtPriceLimitX96,
-    SwapVMKernel.VMEnvelope calldata envelope
+    SwaputerKernel.VMEnvelope calldata envelope
 ) internal returns (uint256 result) {
     (, bytes32 word, uint32 length) =
         router.buyVMExactInputWithResult{value: vmEthAmount}(

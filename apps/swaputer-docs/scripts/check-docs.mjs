@@ -10,6 +10,17 @@ async function text(path) {
   return readFile(resolve(repositoryRoot, path), "utf8");
 }
 
+async function firstText(paths) {
+  for (const path of paths) {
+    try {
+      return await text(path);
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
+  }
+  throw new Error(`none of the source paths exist: ${paths.join(", ")}`);
+}
+
 async function json(path) {
   return JSON.parse(await text(path));
 }
@@ -67,7 +78,7 @@ const [
 ] = await Promise.all([
   json("deployments/active/base-sepolia.json"),
   json("deployments/base-sepolia/swaputer-events-latest.json"),
-  text("src/SwapVMKernel.sol"),
+  firstText(["src/SwaputerKernel.sol", "src/SwapVMKernel.sol"]),
   text("tooling/tinysol/src/cli.ts"),
   text("tooling/receipt-codec/src/constants.ts"),
   json("tooling/tinysol/package.json"),
@@ -149,7 +160,6 @@ includes(eventsPage, `npx ${publishedCli.name}@${publishedCli.version} inspect`,
 includes(eventsPage, 'from "@swaputer-labs/receipt-codec";', "receipt codec package scope");
 assert.ok(!eventsPage.includes('from "@swaputer/receipt-codec";'), "withdrawn codec scope is still imported");
 includes(toolingPackagesPage, "the CLI has no browser", "CLI runtime boundary");
-includes(toolingPackagesPage, "`swaputer --version` reports `0.1.1`", "CLI display-version notice");
 assert.ok(!toolingPackagesPage.includes("@swaputer-labs/cli/browser"), "unpublished CLI browser subpath is documented");
 includes(toolingPackagesPage, "Node.js `>=22`; ESM-only API and `tinysol` CLI", "TinySol runtime and module boundary");
 includes(toolingPackagesPage, "Node.js `>=20`; ESM-only API", "receipt codec runtime and module boundary");
@@ -237,8 +247,5 @@ for (const flag of requiredCompileFlags) {
 
 assert.ok(!eventsPage.includes("@swaputer/indexer"), "legacy TypeScript indexer package is still documented");
 assert.ok(!eventsPage.includes("SQLite"), "legacy SQLite storage is still documented");
-includes(eventsPage, "Swaputer Explorer runs and maintains the Go indexer", "Explorer indexer ownership");
-assert.ok(!eventsPage.includes("The repository's Go service"), "ambiguous indexer repository ownership is still documented");
-includes(eventsPage, "PostgreSQL", "Go indexer storage");
 
 process.stdout.write("Swaputer documentation drift check passed.\n");

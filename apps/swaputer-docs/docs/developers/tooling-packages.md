@@ -1,8 +1,6 @@
 # npm Tooling Packages
 
-Swaputer publishes three focused packages under the `@swaputer-labs` scope.
-They are public, MIT-licensed, and do not include a wallet or a Base Mainnet
-release configuration.
+Swaputer publishes three public, MIT-licensed packages under the `@swaputer-labs` scope.
 
 | Package | Current release | Runtime and module boundary | Purpose |
 | --- | --- | --- | --- |
@@ -69,9 +67,6 @@ Kernel, World, outer `Events` envelope, and complete receipt, then emits text or
 JSON. It never loads a wallet, signs, or submits a transaction. Browser
 applications should use the receipt codec directly; the CLI has no browser
 entry point.
-
-In CLI `0.1.2`, `swaputer --version` reports `0.1.1`. Use the npm package
-identity when checking the installed release.
 
 ## Version and trust boundary
 

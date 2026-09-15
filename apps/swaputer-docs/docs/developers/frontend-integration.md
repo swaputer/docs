@@ -23,7 +23,7 @@ At minimum verify:
 - `byteGasPrice`, pool fee, and maximum byte limit;
 - target Program ID, package hash, ABI hash, and Events descriptor.
 
-See [Verify a Deployment](/developers/deployments) for the fail-closed sequence.
+Use the official [Ethereum Mainnet addresses](/developers/deployments) and follow the checks in [Security & Trust Model](/protocol/security#verify-before-use).
 
 ## 2. Resolve identities and current state
 

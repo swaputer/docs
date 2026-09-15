@@ -33,16 +33,6 @@ Swaputer does not bolt liquidity onto an application after deployment. It is bui
 - **A market from day one.** Every World token begins with native price discovery, and the token → ETH exit path never enters the SVM.
 - **Open composability.** Applications share a World's accounts, programs, and state boundary without deploying a new execution layer for every app.
 
-## The protocol loop
-
-A World begins with liquidity. Liquidity gives the World token an open market and creates the entry path for execution. Each executable buy can carry a signed Action into the SVM. Programs turn that execution into persistent state, assets, markets, and other applications. Execution is paid for in the same World token, linking demand for computation back to the market through a transparent burn.
-
-```text
-Liquidity → executable entry → programs and state → token-denominated execution → liquidity
-```
-
-This loop is the core of Swaputer. The protocol does not prescribe what the World must become. It provides the boundary in which liquidity, computation, and application state can evolve together.
-
 ## Protocol primitives
 
 | Primitive | Definition |
@@ -72,6 +62,7 @@ These applications share the protocol's execution and settlement guarantees, but
 ## Where to go next
 
 - [Architecture in 5 Minutes](/architecture) for the complete system model.
+- [Address](/developers/deployments) for the official Ethereum Mainnet contracts.
 - [Developer Quickstart](/developers/quickstart) and [Build Your First Program](/developers/first-program) to start coding.
 - [Integrate EVM and SVM](/developers/evm-svm-integration) for applications that coordinate both execution domains.
 - [Security & Trust Model](/protocol/security) before handling assets of value.

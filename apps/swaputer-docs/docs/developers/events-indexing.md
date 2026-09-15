@@ -79,8 +79,8 @@ read-only verifier:
 
 ```sh
 npx @swaputer-labs/cli@0.1.2 inspect 0xTRANSACTION_HASH \
-  --network base-sepolia \
-  --rpc-env BASE_SEPOLIA_RPC_URL
+  --network ethereum-mainnet \
+  --rpc-env ETHEREUM_MAINNET_RPC_URL
 ```
 
 The RPC URL is read from the explicitly named environment variable and is never
@@ -138,16 +138,6 @@ WebSockets provide low-latency block notifications, but they do not replace conf
 
 An indexer outage affects query availability, not onchain SVM state. Before a value-bearing operation, applications should refresh the nonce, program identity, and required state directly from the chain.
 
-## Reference indexer
+## Swaputer Scan
 
-Swaputer Explorer runs and maintains the Go indexer that provides:
-
-- strict outer Events and receipt validation;
-- configurable Kernel and start block;
-- PostgreSQL raw history and derived views;
-- reorg rollback, idempotent rescans, and orphan retention;
-- code-hash-bound `verified` and `declared-unverified` decoding;
-- cursor-paginated transaction, contract, account, and SRC20 queries;
-- WebSocket-first ingestion with HTTP reconciliation and RPC failover.
-
-It is the reference implementation of the protocol data model, not part of onchain consensus.
+[Swaputer Scan](https://scan.swaputer.com) provides indexed transactions, programs, accounts, and Events. Treat indexed data as a convenient view of the chain; verify value-bearing state directly against the Kernel before submitting a transaction.
